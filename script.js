@@ -34,8 +34,8 @@ function getComputerChoice() {
 }
 
 let roundResult;
-let wins;
-let losses;
+let wins = 0;
+let losses = 0;
 function playRound() { // Win/Lose/Tie logic
 
     // 1 = rock, 2 = paper, 3 = scissors, Win/Lose/Tie logic
@@ -44,19 +44,19 @@ function playRound() { // Win/Lose/Tie logic
         return roundResult;
     } else if (playerSelection === 1 && computerSelection === 3) { // Rock beats scissors
         roundResult = "Round: You win! Rock beats scissors!";
-        wins++;
+        wins = ++wins;
         return roundResult, wins;
     } else if (playerSelection === 2 && computerSelection === 1) { // Paper beats rock
         roundResult = "Round: You win! Paper beats rock!";
-        wins++;
+        wins = ++wins;
         return roundResult, wins;
     } else if (playerSelection === 3 && computerSelection === 2) { // Scissors beats paper
         roundResult = "Round: You win! Scissors beats paper"
-        wins++;
+        wins = ++wins;
         return roundResult, wins;
     } else { // No other tie or win condition, lose round
         roundResult = "Round: You lose!"
-        losses++;
+        losses = ++losses;
         return roundResult, losses;
     } 
 }
@@ -83,9 +83,9 @@ function winCondition() {
     } else if (wins === losses) {
         console.log("Player and Computer tied! Try again!"); // Tie condition
     } else {
-        console.log("Error")
+        console.log("Error") // If this shows up something is fucked
     }
 }
 
 
-console.log(game(), winCondition()); // Call game and winCondition
+console.log(game(), winCondition(), "(calling functions, ignore this)"); // Call game and winCondition
