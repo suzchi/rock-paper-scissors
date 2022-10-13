@@ -1,3 +1,17 @@
+let playerSelection = window.prompt("Choose your weapon:"); // Prompts user to choose between "rock", "paper", and "scissors"
+playerSelection = playerSelection.toLowerCase(); { // Changes user input to all lowercase
+    if (playerSelection === "rock") {
+        playerSelection = 0;
+    } else if (playerSelection === "paper") {
+        playerSelection = 1;
+    } else if (playerSelection === "scissors") {
+        playerSelection = 2;
+    }
+}
+console.log(playerSelection, "player");
+
+
+
 let randomInteger = Math.floor(Math.random() * 3) // Get 0, 1, 2
 
 let compChoice;
@@ -22,17 +36,5 @@ function getComputerChoice() {
         return compChoice;
     }
 }
-
-let playerSelection = window.prompt("Choose your weapon:"); // Prompts user to choose between "rock", "paper", and "scissors"
-playerSelection = playerSelection.toLowerCase(); { // Changes user input to all lowercase
-    if (playerSelection === "rock") {
-        playerSelection = 0;
-    } else if (playerSelection === "paper") {
-        playerSelection = 1;
-    } else if (playerSelection === "scissors") {
-        playerSelection = 2;
-    }
-}
-console.log(playerSelection, "player");
 
 const computerSelection = getComputerChoice();
