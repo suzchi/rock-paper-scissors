@@ -1,91 +1,138 @@
+rock.addEventListener("click", getUserChoice);
+paper.addEventListener("click", getUserChoice);
+scissors.addEventListener("click", getUserChoice);
+
+let results; // Results DOM variable
+let newResults;
+
+let cScore; // Computer score DOM variable
+let newCScore;
+
+let pScore; // Player score DOM variable
+let newPScore;
+
+// ************************************************************
+// PLAYER SELECTION
+// ************************************************************
+
 let playerSelection;
-function getUserChoice() { // Gets user choice and then converts it into 1, 2, or 3
-
-    playerSelection = window.prompt("Rock, Paper, or Scissors?") // Prompts user for input
-    playerSelection = playerSelection.toLowerCase(); // Changes input to lowercase
-
-    if (playerSelection === "rock") { 
-        playerSelection = 1;
-        return playerSelection;
-    } else if (playerSelection === "paper") {
-        playerSelection = 2;
-        return playerSelection;
-    } else if (playerSelection === "scissors") {
-        playerSelection = 3;
-        return playerSelection;
-    } else {
-        playerSelection = null;
-        console.log("Please enter a valid move!")
-        return playerSelection;
-    }
+let rounds;
+function getUserChoice() {
+    playerSelection = this.id.toString(); // Changes button content to a string and assigns it to playerSelection
+    rounds++;
+    console.log(playerSelection);
+    console.log(getComputerChoice());
+    console.log(playRound(playerSelection, computerSelection));
+    return playerSelection;
 }
 
-
-
+// ************************************************************
+// COMPUTER SELECTION
+// ************************************************************
 
 let randomInteger;
 let computerSelection;
 function getComputerChoice() {
-
     randomInteger = Math.floor(Math.random() * 3 + 1) // Gets random number (1, 2, or 3)
-    computerSelection = randomInteger
-    console.log(computerSelection, "computer selection (1 = rock, 2 = paper, 3 = scissors")
-    return computerSelection;
+    if (randomInteger === 1) {
+        computerSelection = "rock";
+        return computerSelection;
+    } else if (randomInteger === 2) {
+        computerSelection = "paper";
+        return computerSelection;
+    } else  if (randomInteger === 3) {
+        computerSelection = "scissors";
+        return computerSelection;
+    } else {
+        console.log("Error");
+    }
 }
 
-let roundResult;
-let wins = 0;
-let losses = 0;
-function playRound() { // Win/Lose/Tie logic
+// ************************************************************
+// ROUND RESULT LOGIC
+// ************************************************************
 
-    // 1 = rock, 2 = paper, 3 = scissors, Win/Lose/Tie logic
-    if (playerSelection === computerSelection) { // Tie
+let roundResult;
+let playerScore = 0;
+let computerScore = 0;
+function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
+
+    if (playerSelection == computerSelection) {
         roundResult = "Round: You tied!";
+
+        results = document.querySelector("#results");
+        newResults = document.createElement("div");
+        newResults.innerHTML = "<p>" + roundResult + "</p>"
+        results.appendChild(newResults);
+
         return roundResult;
-    } else if (playerSelection === 1 && computerSelection === 3) { // Rock beats scissors
+    } else if (playerSelection == "rock" && computerSelection === "scissors") {
         roundResult = "Round: You win! Rock beats scissors!";
-        wins = ++wins;
-        return roundResult, wins;
-    } else if (playerSelection === 2 && computerSelection === 1) { // Paper beats rock
+        playerScore = ++playerScore;
+
+        results = document.querySelector("#results"); // Display round result
+        newResults = document.createElement("div");
+        newResults.innerHTML = "<p>" + roundResult + "</p>"
+        results.appendChild(newResults);
+
+        return roundResult;
+    } else if (playerSelection == "paper" && computerSelection === "rock") {
         roundResult = "Round: You win! Paper beats rock!";
-        wins = ++wins;
-        return roundResult, wins;
-    } else if (playerSelection === 3 && computerSelection === 2) { // Scissors beats paper
+        playerScore = ++playerScore;
+
+        results = document.querySelector("#results");
+        newResults = document.createElement("div");
+        newResults.innerHTML = "<p>" + roundResult + "</p>"
+        results.appendChild(newResults);
+
+        return roundResult;
+    } else if (playerSelection == "scissors" && computerSelection === "paper") {
         roundResult = "Round: You win! Scissors beats paper"
-        wins = ++wins;
-        return roundResult, wins;
+        playerScore = ++playerScore;
+
+        results = document.querySelector("#results");
+        newResults = document.createElement("div");
+        newResults.innerHTML = "<p>" + roundResult + "</p>"
+        results.appendChild(newResults);
+
+        return roundResult;
     } else { // No other tie or win condition, lose round
         roundResult = "Round: You lose!"
-        losses = ++losses;
-        return roundResult, losses;
+        computerScore = ++computerScore;
+
+        results = document.querySelector("#results"); // Display Round Results
+        newResults = document.createElement("div");
+        newResults.innerHTML = "<p>" + roundResult + "</p>"
+        results.appendChild(newResults);
+
+        return roundResult;
     } 
 }
 
-let score;
+// ************************************************************
+// SCORE
+// ************************************************************
 
-function game() { // Play game function
+pScore = document.querySelector("player-score");
+newPScore = document.createElement("div");
+newPScore.innerHTML = "<p>" + playerScore + "<p>";
 
-    for (i = 0; i < 5; ++i) { // Loop until 5 rounds is reached
-        getUserChoice();
-        console.log(playerSelection, "player selection (1 = rock, 2 = paper, 3 = scissors)");
-        getComputerChoice();
-        playRound();
-        console.log(roundResult)
+cScore = document.querySelector("computer-score");
+newCScore = document.createElement("div");
+newCScore.innerHTML = "<p>" + computerScore + "<p>"
+
+pScore.parentNode.replaceChild(newPScore, pScore);
+
+cScore.parentNode.replaceChild(newCScore, cScore);
+
+// ************************************************************
+// WIN CONDITION
+// ************************************************************
+
+    if (computerScore === 5) {
+        console.log("Computer wins the game!");
     }
-}
-
-function winCondition() {
-
-    if (wins > losses) { // Win condition
-        console.log("Player wins the game! Well done!");
-    } else if (losses > wins) { // Lose condition
-        console.log("Computer wins the game! Try again!");
-    } else if (wins === losses) {
-        console.log("Player and Computer tied! Try again!"); // Tie condition
-    } else {
-        console.log("Error") // If this shows up something is fucked
+    
+    if (playerScore === 5) {
+        console.log("Player wins the game!");
     }
-}
-
-
-console.log(game(), winCondition(), "(calling functions, ignore this)"); // Call game and winCondition
