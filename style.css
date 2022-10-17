@@ -5,10 +5,14 @@
 #content {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 300px;
 }
 
 #left {
     display: flex;
     flex-direction: column;
+}
+
+.hidden {
+    display: none;
 }

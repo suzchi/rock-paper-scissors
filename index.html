@@ -6,20 +6,34 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <div id="content">
+        <div id="content" class="">
             <div id="left">
                 <div id="buttons">
-                    <button  id="rock">Rock</button>
-                    <button  id="paper">Paper</button>
-                    <button  id="scissors">Scissors</button>
+                    <button  class="button" id="rock">Rock</button>
+                    <button  class="button" id="paper">Paper</button>
+                    <button  class="button" id="scissors">Scissors</button>
                 </div>
-                <div id="results">Results:</div>
+                <div id="results"></div>
             </div>
-            <div id="right">
-                <div id="player-score">Player Score:</div>
-                <div id="computer-score">Computer Score:</div>
+            <div id="middle">
+                <div id="scores">
+                    <div id="playerSection">
+                        <p id="playerScoreText">Player: 0</p>
+                    </div>
+                    <div id="computerSection">
+                        <p id="computerScoreText">Computer: 0</p>
+                    </div>
+                </div>
             </div>
         </div>
+                <div id="winCondition">
+                    <p id="winConditionText"></p>
+                </div>
+                <div id="reset">
+                    <button id="resetButton">Reset</button>
+                </div>
+            </div>
+
         <script src="script.js"></script>
     </body>
 </html>
