@@ -1,0 +1,14 @@
+/* * {
+    border: 1px solid red;
+} */
+
+#content {
+    display: flex;
+    flex-direction: row;
+    gap: 300px;
+}
+
+#left {
+    display: flex;
+    flex-direction: column;
+}

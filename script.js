@@ -1,91 +1,135 @@
+// Declarations
 let playerSelection;
-function getUserChoice() { // Gets user choice and then converts it into 1, 2, or 3
-
-    playerSelection = window.prompt("Rock, Paper, or Scissors?") // Prompts user for input
-    playerSelection = playerSelection.toLowerCase(); // Changes input to lowercase
-
-    if (playerSelection === "rock") { 
-        playerSelection = 1;
-        return playerSelection;
-    } else if (playerSelection === "paper") {
-        playerSelection = 2;
-        return playerSelection;
-    } else if (playerSelection === "scissors") {
-        playerSelection = 3;
-        return playerSelection;
-    } else {
-        playerSelection = null;
-        console.log("Please enter a valid move!")
-        return playerSelection;
-    }
-}
-
-
-
-
+let rounds;
 let randomInteger;
 let computerSelection;
-function getComputerChoice() {
-
-    randomInteger = Math.floor(Math.random() * 3 + 1) // Gets random number (1, 2, or 3)
-    computerSelection = randomInteger
-    console.log(computerSelection, "computer selection (1 = rock, 2 = paper, 3 = scissors")
-    return computerSelection;
-}
-
 let roundResult;
-let wins = 0;
-let losses = 0;
-function playRound() { // Win/Lose/Tie logic
+let playerScore = 0;
+let computerScore = 0;
 
-    // 1 = rock, 2 = paper, 3 = scissors, Win/Lose/Tie logic
+// Button event listeners
+rock.addEventListener("click", getUserChoice);
+paper.addEventListener("click", getUserChoice);
+scissors.addEventListener("click", getUserChoice);
+resetButton.addEventListener("click", reset);
+
+// Reset button function
+function reset() {
+    location.reload();
+};
+
+// Player selection
+function getUserChoice() {
+    playerSelection = this.id.toString();
+    console.log(playerSelection);
+    game();
+    return playerSelection;
+};
+
+// Computer selection
+function getComputerChoice() {
+    randomInteger = Math.floor(Math.random() * 3 + 1) // Gets random number (1, 2, or 3)
+    if (randomInteger === 1) {
+        computerSelection = "rock";
+        console.log(computerSelection);
+        return computerSelection;
+    } else if (randomInteger === 2) {
+        computerSelection = "paper";
+        console.log(computerSelection);
+        return computerSelection;
+    } else  if (randomInteger === 3) {
+        computerSelection = "scissors";
+        console.log(computerSelection);
+        return computerSelection;
+    } else {
+        console.log("Error");
+    };
+};
+
+// Round result logic, DOM manipulation to show round results and scores on the page
+function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
+
     if (playerSelection === computerSelection) { // Tie
         roundResult = "Round: You tied!";
-        return roundResult;
-    } else if (playerSelection === 1 && computerSelection === 3) { // Rock beats scissors
-        roundResult = "Round: You win! Rock beats scissors!";
-        wins = ++wins;
-        return roundResult, wins;
-    } else if (playerSelection === 2 && computerSelection === 1) { // Paper beats rock
+        document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
+        
+        console.log(roundResult);
+
+        return;
+    } else if (playerSelection === "rock" && computerSelection === "scissors") { // Win condition 1
+        playerScore = ++playerScore;
+        document.getElementById("playerScoreText").textContent = "Player: " + playerScore; // Change score result on page
+
+        roundResult = "Round: You win! Rock beats scissors!"; 
+        document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
+
+        winCondition();
+
+        console.log(roundResult);
+
+        return playerScore;
+    } else if (playerSelection === "paper" && computerSelection === "rock") { // Win condition 2
+        playerScore = ++playerScore;
+        document.getElementById("playerScoreText").textContent = "Player: " + playerScore; // Change score result on page
+
         roundResult = "Round: You win! Paper beats rock!";
-        wins = ++wins;
-        return roundResult, wins;
-    } else if (playerSelection === 3 && computerSelection === 2) { // Scissors beats paper
+        document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
+
+        winCondition();
+
+        console.log(roundResult);
+
+        return playerScore;
+    } else if (playerSelection === "scissors" && computerSelection === "paper") { // Win condition 3
+        playerScore = ++playerScore;
+        document.getElementById("playerScoreText").textContent = "Player: " + playerScore; // Change score result on page
+
         roundResult = "Round: You win! Scissors beats paper"
-        wins = ++wins;
-        return roundResult, wins;
-    } else { // No other tie or win condition, lose round
+        document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
+
+        winCondition();
+
+        console.log(roundResult);
+
+        return playerScore;
+    } else {                                           // No other tie or win condition, lose round
+        computerScore = ++computerScore;
+        computerScoreText = document.getElementById("#computerScoreText");
+        computerScoreText = document.createElement("div");
+        document.getElementById("computerScoreText").textContent = "Computer: " + computerScore; // Change score result on page
+
         roundResult = "Round: You lose!"
-        losses = ++losses;
-        return roundResult, losses;
-    } 
-}
+        document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
 
-let score;
+        winCondition();
 
-function game() { // Play game function
+        console.log(roundResult);
 
-    for (i = 0; i < 5; ++i) { // Loop until 5 rounds is reached
-        getUserChoice();
-        console.log(playerSelection, "player selection (1 = rock, 2 = paper, 3 = scissors)");
-        getComputerChoice();
-        playRound();
-        console.log(roundResult)
-    }
-}
+        return computerScore;
+    };
+};
 
+// Win condition function
 function winCondition() {
+    if (computerScore === 5) {
+        document.getElementById("winConditionText").textContent = "Computer Wins the Game!";
 
-    if (wins > losses) { // Win condition
-        console.log("Player wins the game! Well done!");
-    } else if (losses > wins) { // Lose condition
-        console.log("Computer wins the game! Try again!");
-    } else if (wins === losses) {
-        console.log("Player and Computer tied! Try again!"); // Tie condition
-    } else {
-        console.log("Error") // If this shows up something is fucked
-    }
-}
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissors").disabled = true;
+    };
+    
+    if (playerScore === 5) {
+        document.getElementById("winConditionText").textContent = "Player Wins the Game!";
 
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissors").disabled = true;
+    };
+};
 
-console.log(game(), winCondition(), "(calling functions, ignore this)"); // Call game and winCondition
+// Game function
+function game() {
+    getComputerChoice();
+    playRound(playerSelection, computerSelection);
+};
