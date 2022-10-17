@@ -1,11 +1,8 @@
-// To-do: - add reset button
-//        - gameover = true/false
-//        - organize code!
+// To-do: - make it so the buttons cant be pressed once win condition is met
 
 // Declarations
 let playerSelection;
 let rounds;
-let gameOver = false;
 let randomInteger;
 let computerSelection;
 let roundResult;
@@ -20,15 +17,13 @@ resetButton.addEventListener("click", reset);
 
 // Reset button function
 function reset() {
-    rounds = 0;
-    document.getElementById("content").classList.remove("hidden");
+    location.reload();
 };
 
 // Player selection
 function getUserChoice() {
     playerSelection = this.id.toString();
     console.log(playerSelection);
-    console.log(gameOver);
     game();
     return playerSelection;
 };
@@ -120,14 +115,18 @@ function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
 function winCondition() {
     if (computerScore === 5) {
         document.getElementById("winConditionText").textContent = "Computer Wins the Game!";
-        gameOver = true;
-        console.log(gameOver);
+
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissors").disabled = true;
     };
     
     if (playerScore === 5) {
         document.getElementById("winConditionText").textContent = "Player Wins the Game!";
-        gameOver = true;
-        console.log(gameOver);
+
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissors").disabled = true;
     };
 };
 
