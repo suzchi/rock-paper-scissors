@@ -1,5 +1,3 @@
-// To-do: - make it so the buttons cant be pressed once win condition is met
-
 // Declarations
 let playerSelection;
 let rounds;
