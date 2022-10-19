@@ -46,6 +46,13 @@ function getComputerChoice() {
     };
 };
 
+// Show who chose what
+function displayChoice() {
+    document.getElementById("playerWeapon").textContent = "Player Chose: " + playerSelection.toString();
+    document.getElementById("computerWeapon").textContent = "Computer Chose: " + computerSelection.toString();
+}
+
+
 // Round result logic, DOM manipulation to show round results and scores on the page
 function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
 
@@ -53,6 +60,7 @@ function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
         roundResult = "Round: You tied!";
         document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
         
+        displayChoice();
         console.log(roundResult);
 
         return;
@@ -64,6 +72,7 @@ function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
         document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
 
         winCondition();
+        displayChoice();
 
         console.log(roundResult);
 
@@ -76,6 +85,7 @@ function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
         document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
 
         winCondition();
+        displayChoice;
 
         console.log(roundResult);
 
@@ -88,6 +98,7 @@ function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
         document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
 
         winCondition();
+        displayChoice();
 
         console.log(roundResult);
 
@@ -102,6 +113,7 @@ function playRound(playerSelection, computerSelection) { // Win/Lose/Tie logic
         document.getElementById("results").textContent = roundResult.toString(); // Change round result on page
 
         winCondition();
+        displayChoice();
 
         console.log(roundResult);
 
