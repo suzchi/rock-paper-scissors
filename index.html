@@ -6,37 +6,30 @@
         <link href="style.css" rel="stylesheet">
     </head>
     <body>
-        <div id="content" class="">
-            <div id="left">
-                <div id="buttons">
-                    <button  class="button" id="rock">Rock</button>
-                    <button  class="button" id="paper">Paper</button>
-                    <button  class="button" id="scissors">Scissors</button>
-                </div>
-                <div id="results"></div>
+        <div id="content-div" class="">
+            <h1>Rock, Paper, Scissors!</h1>
+            <h2>Choose your Weapon</h2>
+            <div id="buttons">
+                <button  class="button" id="rock">Rock</button>
+                <button  class="button" id="paper">Paper</button>
+                <button  class="button" id="scissors">Scissors</button>
             </div>
-            <div id="middle">
-                <div id="scores">
-                    <div id="playerSection">
-                        <p id="playerScoreText">Player: 0</p>
-                    </div>
-                    <div id="computerSection">
-                        <p id="computerScoreText">Computer: 0</p>
-                    </div>
-                </div>
-                <div id="chooseWeapon">
-                    <p id="playerWeapon">Player Chose:</p>
-                    <p id="computerWeapon">Computer Chose:</p>
-                </div>
+            <div id="displayWeapon">
+                <p id="playerWeapon">Player Chose:</p>
+                <p id="computerWeapon">Computer Chose:</p>
+            </div>
+            <div id="results"></div>
+            <div id="scores">
+                <p id="playerScoreText">Player: 0</p>
+                <p id="computerScoreText">Computer: 0</p>
+            </div>
+            <div id="winCondition">
+                <p id="winConditionText"></p>
+            </div>
+            <div id="reset">
+                <button id="resetButton">Reset</button>
             </div>
         </div>
-                <div id="winCondition">
-                    <p id="winConditionText"></p>
-                </div>
-                <div id="reset">
-                    <button id="resetButton">Reset</button>
-                </div>
-            </div>
 
         <script src="script.js"></script>
     </body>
